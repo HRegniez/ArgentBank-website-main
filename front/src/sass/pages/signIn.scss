@@ -1,0 +1,20 @@
+.sign-in{
+    &-button {
+        display: block;
+        width: 100%;
+        padding: 8px;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+    }
+    &-content {
+        box-sizing: border-box;
+        background-color: white;
+        width: 300px;
+        margin: 0 auto;
+        margin-top: 3rem;
+        padding: 2rem;
+    }
+    &-icon {
+        font-size: 5rem;
+    }
+}

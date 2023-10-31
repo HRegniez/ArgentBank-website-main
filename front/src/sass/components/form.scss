@@ -1,0 +1,37 @@
+
+.input{
+    margin-bottom: 0.5rem;
+    label {
+        margin-right: 0.5rem;   
+    }
+    &-remember {
+        display: flex;
+        label {
+            margin-left: 0.25rem;   
+        }
+    }
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        margin-bottom: 1rem;
+        label {
+            font-weight: bold;
+        }
+        input {
+            padding: 5px;
+            font-size: 1.2rem;
+        }
+    }
+    input {
+        padding: 5px;
+        font-size: 1.2rem;
+        width: 8rem;
+    }
+}  
+.edit-info-button{
+    width: 8rem;
+    height: 2.5rem;
+    border-radius: 0.3rem;
+    margin: 1rem 0.2rem 0;
+}
