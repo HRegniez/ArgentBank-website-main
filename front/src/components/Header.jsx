@@ -3,19 +3,20 @@ import { Link } from 'react-router-dom'
 import '../sass/components/header.scss'
 import logo from '../assets/argentBankLogo.png'
 import { useDispatch, useSelector } from "react-redux"
-import { selectToken , resetToken } from '../redux/slices/login'
-import { userData , resetUserData } from '../redux/slices/userData'
-
+import { selectToken, resetToken } from '../redux/slices/login'
+import { userData, resetUserData } from '../redux/slices/userData'
 
 function Header() {
   const token = useSelector(selectToken)
   const data = useSelector(userData)
   const dispatch = useDispatch()
+
+  // Log out user => reset token + user data in Redux
   const logOut = () => {
     dispatch(resetToken())
     dispatch(resetUserData())
   }
-  console.log(data)
+
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
@@ -28,6 +29,7 @@ function Header() {
       </Link>
       {token ? (
         <div>
+          {/* User info when logged in */}
           <Link className="main-nav-item" to="/user">
             <i className="fa fa-user-circle"></i>
             {data.firstName}
@@ -39,12 +41,13 @@ function Header() {
         </div>
       ) : (
         <div>
+          {/* Sign-in when logged out */}
           <Link className="main-nav-item" to="/sign-in">
             <i className="fa fa-user-circle"></i>
             Sign In
           </Link>
         </div>
-      ) }
+      )}
     </nav>
   )
 }

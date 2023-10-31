@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+// User data slice => initial state and reducers
 const userDataSlice = createSlice({
     name: "userData",
     initialState: {
@@ -12,26 +13,26 @@ const userDataSlice = createSlice({
         userName: null,
     },
     reducers: {
+        // Set user data 
         setUserData: (state, action) => {
             return action.payload
         },
+        // Set new user name
         newUserName: (state, action) => {
             state.useName = action.payload
         },
+        // Reset user data
         resetUserData: (state) => {
-            state.createdAt = null;
-            state.email = null;
-            state.firstName = null;
-            state.id = null;
-            state.lastName = null;
-            state.updatedAt = null;
-            state.userName = null;
+            for (let key in state) {
+                state[key] = null
+            }
         }
     },
 })
 
-export const {setUserData , resetUserData, newUserName} = userDataSlice.actions
+// Export actions
+export const { setUserData, resetUserData, newUserName } = userDataSlice.actions
 
-export const userData = (state) => state.userData
+export const userData = (state) => state.userData   // Select user data from Redux store
 
-export default userDataSlice.reducer
+export default userDataSlice.reducer    // Export reducer

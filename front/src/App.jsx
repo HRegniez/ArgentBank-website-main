@@ -6,14 +6,13 @@ import User from "./pages/User"
 import Footer from "./components/Footer"
 import './sass/global.scss'
 import './sass/mediaQueries.scss'
-import { selectToken } from './redux/slices/login'
-import { setUserData } from "./redux/slices/userData"
+import { selectToken } from './redux/slices/login' // Redux selector for token
+import { setUserData } from "./redux/slices/userData" // Redux action for user data
 import { useSelector , useDispatch} from 'react-redux'
 
-
 function App() {
-  const token = useSelector(selectToken)
-  const dispatch = useDispatch()
+  const token = useSelector(selectToken) // Get token from Redux store
+  const dispatch = useDispatch() // Dispatch for Redux actions
 
   const getUserData = async () => {
 
@@ -21,7 +20,7 @@ function App() {
       const response = await fetch('http://localhost:3001/api/v1/user/profile', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`, // Set token in header
           'Content-Type': 'application/json',
         },
       })
@@ -29,7 +28,7 @@ function App() {
       if (response.status === 200) {
         const data = await response.json()
         console.log('Login successful. data:', data.body)
-        // Redux send 
+        // Dispatch user data => Redux store
         dispatch(setUserData(data.body))
       } else if (response.status === 400) {
         console.error('Invalid Fields')
@@ -40,19 +39,20 @@ function App() {
       console.error('API request failed:', error)
     }
   }
-  token && getUserData()
+  token && getUserData() // if token => API for user data
 
   return (
     <>
       <Header />
       <Routes >
         <Route exact path="/" element={ <Home /> } />
-        <Route exact path="/sign-in" element={token ? (<Navigate replace to={"/User"}/>) : (<SignIn />) } />
+        <Route exact path="/sign-in" element={
+          token ? (<Navigate replace to={"/User"}/>) : (<SignIn />) // Conditional rendering based on the token
+        } />
         <Route exact path="/user" element={ <User /> } />
       </Routes>
       <Footer />
     </>
-    
   )
 }
 

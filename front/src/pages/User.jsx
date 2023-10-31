@@ -1,14 +1,12 @@
 import React from 'react'
 import UserHeader from '../components/UserHeader'
 import UserAccount from '../components/UserAccount'
-import { selectToken } from '../redux/slices/login'
-import { useSelector } from 'react-redux'
+// import { selectToken } from '../redux/slices/login'
+// import { useSelector } from 'react-redux'
 
 function User() {
-  const token = useSelector(selectToken)
-  console.log(token)
-  
-  
+  // const token = useSelector(selectToken)
+
   return (
     <main className="main bg-dark">
       <UserHeader/>
