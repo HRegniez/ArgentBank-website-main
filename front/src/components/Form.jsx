@@ -7,6 +7,7 @@ import { setToken } from '../redux/slices/login'
 function Form() {
   const [email, setEmail] = useState('')    // Email input
   const [password, setPassword] = useState('') // Password input
+  const [errorMessage, setErrorMessage] = useState('')
   const dispatch = useDispatch()            // Redux dispatch function
 
   const handleSubmit = async (event) => {
@@ -29,9 +30,9 @@ function Form() {
         // Dispatch token to Redux store
         dispatch(setToken(data.body.token))
       } else if (response.status === 400) {
-        console.error('Invalid Fields')
+        setErrorMessage('Your email or password is incorrect, please try again.')  // Set error message
       } else {
-        console.error('Internal Server Error')
+        setErrorMessage('An internal error occurred, please try again later.')
       }
     } catch (error) {
       console.error('API request failed:', error)
@@ -67,8 +68,8 @@ function Form() {
         />
         <label htmlFor="remember-me">Remember me</label>
       </div>
-
       <Button type="sign-in-button" content="Sign in" />
+      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
     </form>
   )
 }
