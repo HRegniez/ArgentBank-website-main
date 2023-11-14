@@ -47,9 +47,9 @@ function App() {
       <Routes >
         <Route exact path="/" element={ <Home /> } />
         <Route exact path="/sign-in" element={
-          token ? (<Navigate replace to={"/User"}/>) : (<SignIn />) // Condition based on token
+          token ? (<Navigate replace to={"/user"}/>) : (<SignIn />) // Condition based on token
         } />
-        <Route exact path="/user" element={token ? <User /> : <Navigate replace to={<SignIn/>}/>  } />
+        <Route exact path="/user" element={token ? <User /> : <Navigate replace to={"/sign-in"}/>  } />
       </Routes>
       <Footer />
     </>
