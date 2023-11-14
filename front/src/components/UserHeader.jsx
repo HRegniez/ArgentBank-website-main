@@ -9,7 +9,7 @@ import '../sass/components/form.scss'
 function UserHeader() {
   const token = useSelector(selectToken)       // Token from Redux
   const data = useSelector(userData)            // User data from Redux
-  const [display, setDisplay] = useState(false) 
+  const [display, setDisplay] = useState(true) 
   const [userName, setUserName] = useState('')  
   const dispatch = useDispatch()               // Redux dispatch function
 
