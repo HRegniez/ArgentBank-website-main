@@ -233,6 +233,8 @@ paths:
           description: Not Found. Transaction not found.
         '500':
           description: Internal Server Error
+      required:
+        - body
     delete:
       security:
         - Bearer: []
