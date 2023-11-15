@@ -126,7 +126,7 @@ paths:
           description: Unauthorized. Invalid or missing token.
         '500':
           description: Internal Server Error
-
+  /transactions/category
     put:
       security:
         - Bearer: []
@@ -161,7 +161,9 @@ paths:
           description: Not Found. Transaction not found.
         '500':
           description: Internal Server Error
-
+      required:
+        - body
+  /transactions/note
     post:
       security:
         - Bearer: []
@@ -186,6 +188,75 @@ paths:
       responses:
         '200':
           description: Note added to transaction successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Bad Request. Invalid input or missing parameters.
+        '401':
+          description: Unauthorized. Invalid or missing token.
+        '404':
+          description: Not Found. Transaction not found.
+        '500':
+          description: Internal Server Error
+
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Update a note to a transaction
+      description: Modify a note to a transaction
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Modify note to transaction payload
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionNoteModification'
+      responses:
+        '200':
+          description: Note modified successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Bad Request. Invalid input or missing parameters.
+        '401':
+          description: Unauthorized. Invalid or missing token.
+        '404':
+          description: Not Found. Transaction not found.
+        '500':
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Delete a note on a transaction
+      description: Delete a note to a transaction
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Delete a note to transaction payload
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionNoteRemoval'
+      responses:
+        '200':
+          description: Note deleted successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -304,4 +375,20 @@ definitions:
       transactionId:
         type: string
       note:
+        type: string
+  TransactionNoteModification:
+    type: object
+    properties:
+      transactionId:
+        type: string
+      note: 
+        type: string
+      noteIndex:
+        type: string
+  TransactionNoteRemoval:
+    type: object
+    properties:
+      transactionId:
+        type: string
+      noteIndex:
         type: string
