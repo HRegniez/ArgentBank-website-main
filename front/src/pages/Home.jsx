@@ -1,9 +1,9 @@
 import React from 'react'
 import Hero from '../components/Hero'
 import FeaturesItem from '../components/FeaturesItem'
-import iconChat from '../assets/icon-chat.png'
-import iconMoney from '../assets/icon-money.png'
-import iconSecurity from '../assets/icon-security.png'
+import iconChat from '../../public/assets/icon-chat.webp'
+import iconMoney from '../../public/assets/icon-money.webp'
+import iconSecurity from '../../public/assets/icon-security.webp'
 import '../sass/components/features.scss'
 
 
