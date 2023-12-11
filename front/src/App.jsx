@@ -27,7 +27,6 @@ function App() {
 
       if (response.status === 200) {
         const data = await response.json()
-        console.log('Login successful. data:', data.body)
         // Dispatch user data => Redux store
         dispatch(setUserData(data.body))
       } else if (response.status === 400) {

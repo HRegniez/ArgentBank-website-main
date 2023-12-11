@@ -17,10 +17,7 @@ const loginSlice = createSlice({
         }
     },
 })
-
-                    
+                
 export const selectToken = (state) => state.login.token     // Select token from the Redux store
-                 
 export const { setToken, resetToken } = loginSlice.actions  // Export actions
-                    
 export default loginSlice.reducer                           // Export the reducer

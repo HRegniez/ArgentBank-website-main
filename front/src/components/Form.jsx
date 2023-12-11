@@ -26,7 +26,6 @@ function Form() {
 
       if (response.status === 200) {
         const data = await response.json()
-        console.log('Login successful. Token:', data.body.token)
         // Dispatch token to Redux store
         dispatch(setToken(data.body.token))
       } else if (response.status === 400) {

@@ -29,7 +29,6 @@ function UserHeader() {
 
       if (response.status === 200) {
         const data = await response.json()
-        console.log('changed user name:', data)
         // Dispatch userName to Redux store
         dispatch(newUserName(userName))
         setDisplay(!display) // Toggle back to welcome component
