@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import '../sass/components/header.scss'
 import logo from '../../public/assets/argentBankLogo.webp'
@@ -10,12 +10,17 @@ function Header() {
   const token = useSelector(selectToken)
   const data = useSelector(userData)
   const dispatch = useDispatch()
+  const [userName, setUserName] = useState(data.userName)
 
   // Log out user => reset token + user data in Redux
   const logOut = () => {
     dispatch(resetToken())
     dispatch(resetUserData())
   }
+
+  useEffect(() => {
+    setUserName(data.userName)
+  }, [data.userName])
 
   return (
     <nav className="main-nav">
@@ -32,7 +37,7 @@ function Header() {
           {/* User info when logged in */}
           <Link className="main-nav-item" to="/user">
             <i className="fa fa-user-circle"></i>
-            {data.firstName}
+            {userName}
           </Link>
           <Link onClick={logOut} className="main-nav-item" to="/">
             <i className="fa fa-sign-out"></i>
