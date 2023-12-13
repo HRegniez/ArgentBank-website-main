@@ -121,7 +121,7 @@ paths:
         '200':
           description: Transactions retrieved successfully
           schema:
-            $ref: '#/definitions/TransactionResponse'
+            $ref: '#/definitions/TransactionsResponse'
         '401':
           description: Unauthorized. Invalid or missing token.
         '500':
@@ -156,50 +156,14 @@ paths:
           description: Unauthorized. Invalid or missing token.
         '500':
           description: Internal Server Error
-  /transactions/category:
-    patch:
-      security:
-        - Bearer: []
-      tags:
-        - Transaction Module
-      summary: Change a transaction's category
-      description: Update a transaction's category
-      produces:
-        - application/json
-      parameters:
-        - in: header
-          name: Authorization
-          description: Bearer token
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Update transaction category payload
-          required: true
-          schema:
-            $ref: '#/definitions/TransactionUpdate'
-      responses:
-        '200':
-          description: Transaction category updated successfully
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Bad Request. Invalid input or missing parameters.
-        '401':
-          description: Unauthorized. Invalid or missing token.
-        '404':
-          description: Not Found. Transaction not found.
-        '500':
-          description: Internal Server Error
-      
-  /transactions/note:
+
     put:
       security:
         - Bearer: []
       tags:
         - Transaction Module
-      summary: Add a note to a transaction
-      description: Add a note to a transaction
+      summary: Change category or add a note to a transaction
+      description: Change category or add a note to a transaction
       produces:
         - application/json
       parameters:
@@ -213,12 +177,12 @@ paths:
           description: Add note to transaction payload
           required: true
           schema:
-            $ref: '#/definitions/TransactionNote'
+            $ref: '#/definitions/TransactionDetails'
       responses:
         '200':
           description: Note added to transaction successfully
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/TransactionDetailResponse'
         '400':
           description: Bad Request. Invalid input or missing parameters.
         '401':
@@ -285,7 +249,10 @@ definitions:
       userName:
         type: string
 
-
+  TransactionsResponse:
+    type: array
+    items:
+      $ref: '#/definitions/TransactionResponse'
   TransactionResponse:
     type: object
     properties:
@@ -313,6 +280,12 @@ definitions:
   TransactionDataResponse:
     type: object
     properties:
+      date:
+        type: string
+      description:
+        type: string
+      amount:
+        type: string
       transactionId:
         type: string      
       transactionType:
@@ -322,18 +295,20 @@ definitions:
       note:
         type: string  
 
-  TransactionUpdate:
+
+  TransactionDetails:
+    type: object
+    properties:
+      category:
+        type: string
+      note:
+        type: string
+  TransactionDetailResponse:
     type: object
     properties:
       transactionId:
         type: string
       category:
-        type: string
-
-  TransactionNote:
-    type: object
-    properties:
-      transactionId:
         type: string
       note:
         type: string
